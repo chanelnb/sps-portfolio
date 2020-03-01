@@ -11,18 +11,43 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
 /**
- * Adds a random greeting to the page.
+ * Fetches a random quote from the server and adds it to the DOM.
  */
-function addRandomGreeting() {
-  const greetings =
-      ['Hello world!', '¡Hola Mundo!', '你好，世界！', 'Bonjour le monde!'];
+function getDataServlet() {
+  console.log('Fetching a Hello Chanel.');
 
-  // Pick a random greeting.
-  const greeting = greetings[Math.floor(Math.random() * greetings.length)];
+  const responsePromise = fetch('/data');
 
-  // Add it to the page.
-  const greetingContainer = document.getElementById('greeting-container');
-  greetingContainer.innerText = greeting;
+  responsePromise.then(handleResponse);
 }
+
+function handleResponse(response) {
+  console.log('Handling the response.');
+
+  const textPromise = response.text();
+
+  textPromise.then(addDataServletToDom);
+}
+
+function addDataServletToDom(texts) {
+  console.log('Adding quote to dom: ' + texts);
+
+  const textsContainer = document.getElementById('dataServlet-container');
+  textsContainer.innerHTML= texts;
+}
+
+
+function getTextUsingArrowFunctions() {
+  fetch('/data').then(response => response.text()).then((texts) => {
+    document.getElementById('dataServlet-container').innerHTML = texts;
+  });
+}
+
+
+async function getTextUsingAsyncAwait() {
+  const response = await fetch('/data');
+  const texts = await response.text();
+  document.getElementById('dataServlet-container').innerHTML = texts;
+}
+
