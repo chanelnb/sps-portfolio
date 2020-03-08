@@ -1,3 +1,4 @@
+
 // Copyright 2019 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -51,3 +52,25 @@ async function getTextUsingAsyncAwait() {
   document.getElementById('dataServlet-container').innerHTML = texts;
 }
 
+function getList() {
+  fetch('/data').then(response => response.json()).then((list) => {
+    
+    console.log(list);
+
+    const commentList = document.getElementById('list-container');
+    commentList.innerHTML = '';
+    for( let element in list ){
+        var node = createListElement(list[element]);
+        console.log(node);
+        commentList.appendChild(node);
+    }
+    
+  });
+}
+
+/** Creates an <li> element containing text. */
+function createListElement(text) {
+  const liElement = document.createElement('li');
+  liElement.innerText = text;
+  return liElement;
+}
