@@ -54,6 +54,14 @@ difference in my family and make a difference in my community as well.</h4>
         <a href="https://www.linkedin.com/in/chanel-brown-496756145?trk=people-guest_profile-result-card_result-card_full-click" class="fa fa-linkedin"></a>
         <p> Feel free to check me out and contact me through my linkedin account </p>
         </footer>   
+        <body onload="getList()">
+        <form method="POST" action="/data">
+            <label for="comment">Comment Below</label><br>
+            <input type="text" name = "comment"><br>
+            <button>Submit</button>
+        </form>
+        <ul id="comment-container"></ul>
+      </body>
     </div>
   </body>
 </html>

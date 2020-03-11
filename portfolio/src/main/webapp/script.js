@@ -52,20 +52,17 @@ async function getTextUsingAsyncAwait() {
   document.getElementById('dataServlet-container').innerHTML = texts;
 }
 
-function getList() {
-  fetch('/data').then(response => response.json()).then((list) => {
-    
-    console.log(list);
+async function getList() {
 
-    const commentList = document.getElementById('list-container');
-    commentList.innerHTML = '';
-    for( let element in list ){
-        var node = createListElement(list[element]);
-        console.log(node);
-        commentList.appendChild(node);
-    }
-    
-  });
+const response = await fetch('/data');
+const comments = await response.json();
+const commentList = document.getElementById("dataServlet-container");
+commentList.innerHTML = '';
+comments.forEach((line) => {
+    console.log(line);
+    commentList.appendChild(createListElement(line));
+
+});
 }
 
 /** Creates an <li> element containing text. */
