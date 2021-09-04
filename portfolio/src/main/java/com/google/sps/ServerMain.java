@@ -47,5 +47,9 @@ public class ServerMain {
 
     // Keep the main thread alive while the server is running.
     server.join();
+
+
+    }
+
   }
-}
+
